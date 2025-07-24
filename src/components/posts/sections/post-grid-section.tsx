@@ -169,7 +169,7 @@ export default function PostGridSection() {
                   alt={
                     post && post.title && post.title
                       ? post.title
-                      : "Imagem do Portal Florianópolis"
+                      : "Imagem do Portal Biguaçu"
                   }
                   fill
                   className="object-cover"

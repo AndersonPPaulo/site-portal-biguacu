@@ -1,7 +1,7 @@
 export const districtsFlorianopolis = [
   "Abraão",
   "Agronômica",
-  "Área Rural de Florianópolis",
+  "Área Rural de Biguaçu",
   "Armação do Pântano do Sul",
   "Balneário",
   "Barra da Lagoa",

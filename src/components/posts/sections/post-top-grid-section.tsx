@@ -152,7 +152,7 @@ export default function PostTopGridSection() {
       {/* Header */}
       <div className="flex items-center justify-between ">
         <h2 className="text-2xl font-semibold text-primary">
-          Top Portal Florianópolis
+          Top Portal Biguaçu
         </h2>
       </div>
 

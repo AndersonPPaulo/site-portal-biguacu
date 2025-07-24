@@ -46,7 +46,7 @@ export function CardCompany({
 
   console.log('company', company);
 
-  const districtActive = company.district || "Florianópolis";
+  const districtActive = company.district || "Biguaçu";
   const nameCompanyActive = company.name || "Nome da Empresa";
 
   // Função para processar categorias (string ou array)

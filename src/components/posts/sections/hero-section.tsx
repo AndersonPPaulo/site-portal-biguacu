@@ -214,7 +214,7 @@ export default function HeroSection() {
                 alt={
                   mainPost && mainPost.title && mainPost.title
                     ? mainPost.title
-                    : "Imagem do Portal Florianópolis"
+                    : "Imagem do Portal Biguaçu"
                 }
                 fill
                 className="object-cover"

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "O Portal on-line da cidade da Florianópolis - Portal Florianópolis",
-  description: "Informações de contato dos comércios e notícias de Florianópolis",
+  title: "O Portal on-line da cidade de Biguaçu - Portal Biguaçu",
+  description: "Informações de contato dos comércios e notícias de Biguaçu",
 };
 
 export default function RootLayout({

@@ -18,35 +18,35 @@ export async function generateMetadata({
   const faviconUrl = "https://novo.portalpalhoca.com.br/favicon.ico";
 
   return {
-    title: `Notícias sobre ${name.toLocaleUpperCase()} | Portal Florianópolis`,
+    title: `Notícias sobre ${name.toLocaleUpperCase()} | Portal Biguaçu`,
     description:
-      "Portal Florianópolis é um site de notícias que traz as últimas informações sobre a cidade de Florianópolis, SC.",
+      "Portal Biguaçu é um site de notícias que traz as últimas informações sobre a cidade de Biguaçu, SC.",
     openGraph: {
       type: "website",
-      siteName: "Portal Florianópolis",
-      title: `Notícias sobre ${name.toLocaleUpperCase()} | Portal Florianópolis`,
+      siteName: "Portal Biguaçu",
+      title: `Notícias sobre ${name.toLocaleUpperCase()} | Portal Biguaçu`,
       description:
-        "Portal Florianópolis é um site de notícias que traz as últimas informações sobre a cidade de Florianópolis, SC.",
+        "Portal Biguaçu é um site de notícias que traz as últimas informações sobre a cidade de Biguaçu, SC.",
       images: [
         {
           url: faviconUrl,
           width: 32,
           height: 32,
-          alt: "Portal Florianópolis",
+          alt: "Portal Biguaçu",
         },
       ],
     },
     twitter: {
       card: "summary",
-      title: `Notícias sobre ${name.toLocaleUpperCase()} | Portal Florianópolis`,
+      title: `Notícias sobre ${name.toLocaleUpperCase()} | Portal Biguaçu`,
       description:
-        "Portal Florianópolis é um site de notícias que traz as últimas informações sobre a cidade de Florianópolis, SC.",
+        "Portal Biguaçu é um site de notícias que traz as últimas informações sobre a cidade de Biguaçu, SC.",
       images: [
         {
           url: faviconUrl,
           width: 32,
           height: 32,
-          alt: "Portal Florianópolis",
+          alt: "Portal Biguaçu",
         },
       ],
     },

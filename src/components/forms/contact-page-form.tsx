@@ -136,10 +136,10 @@ export default function ContactForm() {
       {/* Header */}
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-semibold text-primary">
-          Anúncie sua marca no Portal Florianópolis
+          Anúncie sua marca no Portal Biguaçu
         </h1>
         <p className="text-gray-600 max-w-2xl">
-          Faça parte do maior portal de notícias e comércios de Florianópolis.
+          Faça parte do maior portal de notícias e comércios de Biguaçu.
           Preencha o formulário abaixo e nossa equipe entrará em contato.
         </p>
       </div>
@@ -376,7 +376,7 @@ export default function ContactForm() {
                 <div>
                   <h4 className="font-medium text-gray-800">Maior Alcance</h4>
                   <p className="text-gray-600 text-sm">
-                    Chegue a mais clientes em Florianópolis e região
+                    Chegue a mais clientes em Biguaçu e região
                   </p>
                 </div>
               </div>

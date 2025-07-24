@@ -12,10 +12,10 @@ export function Footer() {
           {/* Logo and description */}
           <div className="max-w-[380px] ">
             <Link href="#" className="flex items-center">
-              <Image src={logo} alt="Portal Florianópolis" width={200} height={50}/>
+              <Image src={logo} alt="Portal Biguaçu" width={200} height={50}/>
             </Link>
             <p className="mt-4 text-black font-[400] text-md">
-              Sua fonte completa de notícias e comércios em Florianópolis
+              Sua fonte completa de notícias e comércios em Biguaçu
             </p>
             <div className="flex gap-4 mt-4">
               <Link
@@ -211,7 +211,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="mt-12 pt-4 text-center text-sm text-gray-600">
-          Copyright © 2025 Portal Florianópolis | Todos os direitos reservados
+          Copyright © 2025 Portal Biguaçu | Todos os direitos reservados
         </div>
       </div>
     </footer>

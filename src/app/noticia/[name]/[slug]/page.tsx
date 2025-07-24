@@ -20,18 +20,18 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "Noticias Portal Florianópolis",
+      title: "Noticias Portal Biguaçu",
       description:
         "Essa notícia foi encontrada, porem pode ter ocorrido algum erro ao carregar.",
     };
   }
 
   return {
-    title: `${article.title} | Portal Florianópolis`,
+    title: `${article.title} | Portal Biguaçu`,
     description: article.resume_content,
     openGraph: {
       type: "article",
-      siteName: "Portal Florianópolis",
+      siteName: "Portal Biguaçu",
       title: article.title,
       description: article.resume_content,
       images: [

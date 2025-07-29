@@ -94,6 +94,7 @@ export default function NewsCategoryMenu({ pathname }: { pathname: string | null
                   alt={category.name}
                   width={24}
                   height={24}
+                  unoptimized
                 />
               </div>
               <span className="text-xs mt-1">{category.name}</span>

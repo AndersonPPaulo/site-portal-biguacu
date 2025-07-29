@@ -52,6 +52,7 @@ export default function ProfileColumnist() {
                   ? filteredCol.creator.user_image?.url
                   : default_image
               }
+              unoptimized
               width={140}
               height={140}
               alt="Imagem perfil do colunista"
@@ -95,6 +96,7 @@ export default function ProfileColumnist() {
                         ? post.thumbnail.url
                         : default_image
                     }
+                    unoptimized
                     alt={post && post.title && post.title
                         ? post.title
                         : "Imagem do Portal Biguaçu"}
@@ -146,6 +148,7 @@ export default function ProfileColumnist() {
                         ? post.thumbnail.url
                         : default_image
                     }
+                    unoptimized
                     alt={post.thumbnail?.description ?? "Imagem da notícia"}
                     fill
                     className="object-cover"

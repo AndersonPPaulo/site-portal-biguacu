@@ -312,7 +312,8 @@ export default function ComercioDetails() {
                 <Image
                   src={company.image}
                   alt={company.name}
-                  fill
+                  fill 
+                  unoptimized
                   className="object-cover"
                   priority
                   onError={(e) => {

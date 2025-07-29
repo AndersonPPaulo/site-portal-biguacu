@@ -122,6 +122,7 @@ export function CardCompany({
           src={company && company.image ? company.image : default_image}
           alt={company && company.name ? company.name : "Imagem da empresa"}
           fill
+          unoptimized
           className="object-cover"
         />
       </div>

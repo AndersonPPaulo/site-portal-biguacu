@@ -126,7 +126,6 @@ export const PublicCompanyProvider = ({ children }: IChildrenReact) => {
         ...(filters.district && { district: filters.district }),
         portalReferer: window.location.hostname,
       };
-      console.log("window.location.hostname", window.location.hostname);
 
       const response = await api.get("/company/site", { params });
 

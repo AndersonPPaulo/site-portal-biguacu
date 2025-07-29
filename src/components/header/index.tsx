@@ -53,6 +53,7 @@ export default function Header() {
               <Image
                 src={logo}
                 alt="Logo"
+                unoptimized
                 className="h-10 min-w-[159px] max-w-[160px]"
               />
             </Link>

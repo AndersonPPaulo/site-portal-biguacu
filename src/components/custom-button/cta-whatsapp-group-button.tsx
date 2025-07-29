@@ -34,7 +34,7 @@ export default function ButtonCTAWhatsAppButton() {
       href={whatsapp_groups}
       className="inline-flex items-center gap-2 bg-secondary text-primary px-4 py-3 rounded-3xl hover:bg-[#e5f2f9] max-w-[330px]"
     >
-      <Image src={wppIcon} alt="Icone do whatsapp" className="h-5 w-5 text-primary" />
+      <Image src={wppIcon} alt="Icone do whatsapp" className="h-5 w-5 text-primary" unoptimized/>
       Entrar em nosso grupo de WhatsApp
     </Link>
   );

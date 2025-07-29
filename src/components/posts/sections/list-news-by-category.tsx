@@ -209,6 +209,7 @@ export default function ListArticlesByCategory() {
                       : "Imagem do Portal Biguaçu"
                   }
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               </div>

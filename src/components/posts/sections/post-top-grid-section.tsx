@@ -180,6 +180,7 @@ export default function PostTopGridSection() {
                     "Imagem da noticia do portal"
                   }
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               </div>

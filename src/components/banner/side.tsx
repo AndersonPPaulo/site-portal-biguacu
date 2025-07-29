@@ -103,6 +103,7 @@ const SideBanner = () => {
           height={500}
           alt={randomBanner.name} 
           priority
+          unoptimized
           className="bg-cover rounded-lg"
         />
       </Link>

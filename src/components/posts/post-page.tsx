@@ -180,6 +180,7 @@ export default function PostPage() {
                         ? articleBySlug.thumbnail.url
                         : default_image
                     }
+                    unoptimized
                     alt={
                       articleBySlug &&
                       articleBySlug.title &&
@@ -196,6 +197,7 @@ export default function PostPage() {
                     alt={"Sem imagem cadastrada na noticia"}
                     fill
                     className="object-cover"
+                    unoptimized
                   />
                 )}
               </div>
@@ -257,6 +259,7 @@ export default function PostPage() {
                           src={post.thumbnail.url}
                           alt={post.thumbnail.description || "Imagem do artigo"}
                           fill
+                          unoptimized
                           className="object-cover"
                         />
                       )}

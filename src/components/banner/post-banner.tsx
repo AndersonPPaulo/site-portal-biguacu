@@ -100,6 +100,7 @@ const PostBanner = () => {
             src={randomBanner.url}
             width={730}
             height={250}
+            unoptimized
             alt={randomBanner.name}
             priority
             className="bg-cover rounded-lg min-h-[110px] lg:min-h-[240px] max-h-[110px] lg:max-h-[240px]"

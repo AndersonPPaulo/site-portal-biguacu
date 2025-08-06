@@ -113,13 +113,13 @@ export default function ClientListArticlesByCategory() {
       categoryQuery === undefined ? "Todos" : categoryQuery;
 
     if (activeCategory === "Todos") {
-      return `Comércios em Biguaçu${
+      return `Comércios em Palhoça${
         selectedDistrict ? ` - ${selectedDistrict}` : ""
       }`;
     }
     return `${
       activeCategory ? capitalize(SlugToText(activeCategory)) : "Comércios"
-    } em Biguaçu${selectedDistrict ? ` - ${selectedDistrict}` : ""}`;
+    } em Palhoça${selectedDistrict ? ` - ${selectedDistrict}` : ""}`;
   };
 
   // Configurar mapa global

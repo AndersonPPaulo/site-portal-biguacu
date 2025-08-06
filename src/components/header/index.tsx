@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import CustomInput from "../custom-input/custom-input";
 import CompanyCategorysMenu from "../menus/company-categorys-menu";
 import NewsCategoryMenu from "../menus/news-categorys-menu";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import TopBanner from "../banner/top";
 
 export default function Header() {
@@ -17,8 +17,12 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isComercioPath =
-    pathname === "/comercio" || pathname?.startsWith("/comercio/");
+    pathname === "/comercio/" || pathname.startsWith("/comercio/?categoria=");
+
+  const isNoticiaPath = pathname?.startsWith("/noticia/") || pathname === "/";
+
   const isContatoPath = pathname === "/contato";
+
   const isHiddenMobileTabs =
     pathname?.startsWith("/colunista/") || pathname?.startsWith("/noticia/");
 
@@ -53,8 +57,8 @@ export default function Header() {
               <Image
                 src={logo}
                 alt="Logo"
+                className="h-10 max-w-[159px]"
                 unoptimized
-                className="h-10 min-w-[159px] max-w-[160px]"
               />
             </Link>
           </div>
@@ -162,11 +166,9 @@ export default function Header() {
           }`}
         >
           {/* mt-[130px]: espaço para header fixo (ajuste conforme altura real do header fixo) */}
-          {isContatoPath ? (
-            <div className="text-center py-4"></div>
-          ) : (
+          {isComercioPath || isNoticiaPath ? (
             <CustomInput pathname={pathname} />
-          )}
+          ) : null}
         </div>
       )}
 

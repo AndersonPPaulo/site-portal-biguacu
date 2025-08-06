@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 // Import icons
 import todosIcon from "@/assets/icons/company/todos.png";
@@ -71,6 +70,9 @@ export default function CompanyCategoryMenu({
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [showMap, setShowMap] = useState(false);
+
+  const isComercioPath =
+    pathname === "/comercio/" || pathname?.startsWith("/comercio/?categoria=");
 
   const toggleMap = () => {
     const newMapState = !showMap;
@@ -357,9 +359,7 @@ export default function CompanyCategoryMenu({
         {showRightArrow && (
           <div
             className={`absolute ${
-              pathname?.startsWith("/comercio/detalhes")
-                ? "right-0"
-                : "right-33"
+              !isComercioPath ? "right-0" : "right-33"
             } h-full hidden lg:flex items-center justify-center z-30`}
           >
             <div

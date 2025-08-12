@@ -106,7 +106,9 @@ export default function PostPage() {
     }
   }, [slug]);
 
-  const sidePosts = publishedArticles?.data.slice(0, 5);
+  const sidePosts = publishedArticles?.data
+    ?.filter((post) => post.id !== articleBySlug?.id) // exclui o post atual
+    ?.slice(0, 5);
 
   return (
     <section className="flex flex-col gap-6 mx-auto max-w-[1272px] justify-between">

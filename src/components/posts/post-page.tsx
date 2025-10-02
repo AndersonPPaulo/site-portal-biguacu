@@ -184,7 +184,7 @@ export default function PostPage() {
                       articleBySlug.title &&
                       articleBySlug.title
                         ? articleBySlug.title
-                        : "Imagem do portal palhoça"
+                        : "Imagem do portal Biguaçu"
                     }
                     fill
                     className="object-cover"

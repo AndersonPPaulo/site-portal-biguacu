@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ColumnistsSection } from "../../columnists/columnist-section";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams, usePathname } from "next/navigation";
 import { ArticleContext } from "@/provider/article";
@@ -46,7 +45,7 @@ export default function PostGridWwithColumnistSection() {
   }, []);
 
   const gridPosts =
-    articlesByPortalHighlightPositionFour?.data.slice(0, 3) || [];
+    articlesByPortalHighlightPositionFour?.data.slice(0, 4) || [];
 
   // Analytics: Registrar view inicial quando componente carrega
   useEffect(() => {
@@ -151,12 +150,12 @@ export default function PostGridWwithColumnistSection() {
   return (
     <section
       ref={gridColumnistSectionRef}
-      className="flex flex-col lg:flex-row gap-6 mx-auto max-w-[1272px] justify-between py-4"
+      className="w-full sm:px-6 lg:px-10 mx-auto max-w-7xl"
     >
       <div
         className={`flex flex-col ${
           noSlug ? "lg:flex-row" : "lg:flex-row"
-        } gap-7`}
+        } gap-10`}
       >
         {gridPosts.map((post, idx) => (
           <Link
@@ -192,7 +191,7 @@ export default function PostGridWwithColumnistSection() {
                   alt={
                     post && post.title && post.title
                       ? post.title
-                      : "Imagem do Portal Biguaçu"
+                      : "Imagem do portal Biguaçu"
                   }
                   fill
                   unoptimized
@@ -218,8 +217,6 @@ export default function PostGridWwithColumnistSection() {
           </Link>
         ))}
       </div>
-
-      {noSlug && <ColumnistsSection />}
     </section>
   );
 }

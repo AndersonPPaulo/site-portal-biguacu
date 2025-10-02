@@ -12,9 +12,7 @@ export function CompanyGridSection() {
 
   // Carregar dados na inicialização
   useEffect(() => {
-    if (!companies) {
       listCompanies(1, 20); // Carregar todas as empresas
-    }
   }, []);
 
   // Converter dados da API para o formato esperado pelo CardCompany

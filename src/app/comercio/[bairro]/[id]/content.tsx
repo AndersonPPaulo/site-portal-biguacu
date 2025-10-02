@@ -13,7 +13,6 @@ import { usePublicCompany } from "@/provider/company";
 import { CompanyAnalyticsContext } from "@/provider/analytics/company";
 import DefaultImage from "../../../../assets/no-img.png";
 
-
 // Função para extrair coordenadas do link do Google Maps
 function extractCoordinatesFromMapsLink(
   mapsLink: string
@@ -278,7 +277,7 @@ export default function ComercioDetails() {
   return (
     <DefaultPage>
       <Header />
-      <div className="max-w-[1272px] mx-auto py-5">
+      <div className="min-w-72 max-w-[1272px] mx-auto py-5">
         {/* Trilha de navegação */}
         <div className="hidden md:flex items-center gap-2 text-sm text-gray-500 mb-4">
           <Link href="/" className="hover:text-red-600 transition-colors">
@@ -289,7 +288,7 @@ export default function ComercioDetails() {
             href="/comercio"
             className="hover:text-red-600 transition-colors"
           >
-            Comércios de Palhoça
+            Comércios de Biguaçu
           </Link>
           <span className="text-gray-400">›</span>
           <Link

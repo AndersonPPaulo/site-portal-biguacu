@@ -102,7 +102,7 @@ export default function ComercioDetails() {
             name: apiCompany.name,
             category: apiCompany.company_category?.[0]?.name || "Comércio",
             categories: apiCompany.company_category || [],
-            image: apiCompany.company_image?.url || "/placeholder-business.jpg",
+            image: apiCompany.company_image?.url,
             phone: apiCompany.phone || "Não informado",
             description: apiCompany.description || "Descrição não disponível",
             hours: apiCompany.openingHours || "Horário não informado",
@@ -111,7 +111,7 @@ export default function ComercioDetails() {
             linkLocationMaps: apiCompany.linkLocationMaps,
             linkLocationWaze: apiCompany.linkLocationWaze,
             location: coordinates || {
-              lat: -27.64662, // Fallback para coordenadas padrão
+              lat: -27.64662, 
               lng: -48.667361,
             },
           };
@@ -287,7 +287,7 @@ export default function ComercioDetails() {
             href="/comercio"
             className="hover:text-red-600 transition-colors"
           >
-            Comércios de Biguaçu
+            Comércios de Palhoça
           </Link>
           <span className="text-gray-400">›</span>
           <Link
@@ -314,33 +314,7 @@ export default function ComercioDetails() {
                   className="object-cover"
                   priority
                   unoptimized
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = "/placeholder-business.jpg";
-                  }}
                 />
-              </div>
-
-              {/* Indicadores de slide diretamente abaixo da imagem */}
-              <div className="flex justify-center mt-2 gap-1">
-                <div
-                  className={`w-2 h-2 rounded-full cursor-pointer ${
-                    activeImage === 0 ? "bg-red-500" : "bg-gray-300"
-                  }`}
-                  onClick={() => setActiveImage(0)}
-                ></div>
-                <div
-                  className={`w-2 h-2 rounded-full cursor-pointer ${
-                    activeImage === 1 ? "bg-red-500" : "bg-gray-300"
-                  }`}
-                  onClick={() => setActiveImage(1)}
-                ></div>
-                <div
-                  className={`w-2 h-2 rounded-full cursor-pointer ${
-                    activeImage === 2 ? "bg-red-500" : "bg-gray-300"
-                  }`}
-                  onClick={() => setActiveImage(2)}
-                ></div>
               </div>
             </div>
 
@@ -350,11 +324,11 @@ export default function ComercioDetails() {
                 {company.name}
               </h1>
 
-              <div className="inline-block bg-red-100 text-red-500 px-3 py-1 rounded-full text-sm font-medium mb-4">
+              <div className="inline-block bg-red-100 text-red-500 px-3 py-1 rounded-full text-sm font-medium mb-5">
                 {company.category}
               </div>
 
-              <p className="text-gray-700 mb-4">{company.description}</p>
+              <p className="text-gray-700 mb-4 ">{company.description}</p>
 
               <div className="space-y-3">
                 {/* Horário */}
@@ -363,23 +337,17 @@ export default function ComercioDetails() {
                   <span className="text-gray-600">{company.hours}</span>
                 </div>
 
-                {/* Telefone */}
-                <div className="flex items-start gap-2">
-                  <Phone className="#363636 w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-600">{company.phone}</span>
-                </div>
-
                 {/* Endereço */}
                 <div className="flex items-start gap-2">
                   <MapPin className="#363636 w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-600">{company.address}</span>
+                  <span className="text-gray-600 max-w-2xl">{company.address}</span>
                 </div>
               </div>
 
               {/* Botão WhatsApp com analytics */}
               {company.linkWhatsapp && (
                 <Button
-                  className="bg-green-200 hover:bg-green-100 cursor-pointer mt-6 rounded-4xl px-4 py-2 text-green-600 flex items-center gap-2"
+                  className="bg-green-200 hover:bg-green-100 cursor-pointer mt-10 rounded-4xl px-4 py-2 text-green-600 flex items-center gap-2"
                   variant="default"
                   onClick={handleWhatsAppClick}
                 >

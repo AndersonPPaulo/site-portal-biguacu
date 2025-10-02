@@ -14,6 +14,7 @@ export interface IPublicCompany {
   linkWhatsapp?: string;
   linkLocationMaps: string;
   linkLocationWaze: string;
+  highlight: boolean;
   address: string;
   city?: string;
   district?: string;
@@ -70,7 +71,7 @@ interface ListCompanyFilters {
   category?: string;
   search?: string;
   district?: string;
-  portalReferer?: string;
+  portalReferer?: string
 }
 
 interface IPublicCompanyContext {
@@ -125,7 +126,7 @@ export const PublicCompanyProvider = ({ children }: IChildrenReact) => {
         ...(filters.search && { name: filters.search }),
         ...(filters.category && { category: filters.category }),
         ...(filters.district && { district: filters.district }),
-        portalReferer: window.location.hostname,
+        ...({portalReferer: window.location.hostname}) 
       };
 
       const response = await api.get("/company/site", { params });

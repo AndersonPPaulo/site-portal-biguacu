@@ -8,7 +8,7 @@ import { ArticleContext } from "@/provider/article";
 import { ArticleAnalyticsContext } from "@/provider/analytics/article";
 import { formatDate } from "@/utils/formatDate";
 import normalizeTextToslug from "@/utils/normalize-text-to-slug";
-import default_image from "@/assets/default image.webp";
+import default_image from "@/assets/no-img.png";
 
 export default function PostTopGridSection({
   currentPostId,
@@ -156,7 +156,7 @@ export default function PostTopGridSection({
 
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-semibold text-primary">
-          Top Portal Biguaçu
+          Top Portal Josefense
         </h2>
       </div>
 
@@ -187,7 +187,7 @@ export default function PostTopGridSection({
                     alt={
                       post && post.title && post.title
                         ? post.title
-                        : "Imagem do portal Biguaçu"
+                        : "Imagem do portal Josefense"
                     }
                     fill
                     className="object-cover"

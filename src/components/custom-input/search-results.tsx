@@ -10,7 +10,7 @@ import { ChevronLeft, ChevronRight, Calendar, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ArticleResponse } from "@/provider/article";
 import { formatDate } from "@/utils/formatDate";
-import default_image from "@/assets/default image.webp";
+import default_image from "@/assets/no-img.png";
 
 interface SearchResultsProps {
   isVisible: boolean;
@@ -142,7 +142,7 @@ export default function SearchResults({
                     alt={
                       article && article.title && article.title
                         ? article.title
-                        : "Imagem do Portal Biguaçu"
+                        : "Imagem do portal Josefense"
                     }
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                     loading="lazy"

@@ -8,31 +8,9 @@ import { MapPin } from "lucide-react";
 import ReactDOMServer from "react-dom/server";
 import { CardCompany } from "../companys/card-company";
 import { IPublicCompany } from "@/provider/company";
+import default_image from "@/assets/no-img.png";
+import { StaticImageData } from "next/image";
 
-function extractCoordinatesFromMapsLink(
-  mapsLink: string
-): { lat: number; lng: number } | null {
-  if (!mapsLink) return null;
-
-  try {
-    const url = new URL(mapsLink);
-    const qParam = url.searchParams.get("q");
-
-    if (qParam && qParam.includes(",")) {
-      const [lat, lng] = qParam.split(",");
-      const latitude = parseFloat(lat.trim());
-      const longitude = parseFloat(lng.trim());
-
-      if (!isNaN(latitude) && !isNaN(longitude)) {
-        return { lat: latitude, lng: longitude };
-      }
-    }
-  } catch (error) {
-    console.error("Erro ao extrair coordenadas do link:", error);
-  }
-
-  return null;
-}
 interface ICompanyCategory {
   id: string;
   name: string;
@@ -40,12 +18,24 @@ interface ICompanyCategory {
   updated_at: string;
 }
 
+// Interface para imagens da empresa
+interface ICompanyImage {
+  id: string;
+  key: string;
+  url: string;
+  original_name?: string;
+  mime_type?: string;
+  size?: number;
+  uploaded_at?: Date;
+  company_id: string;
+}
+
 interface CommerceMapData {
   id: string;
   name: string;
   address: string;
   company_category: ICompanyCategory[];
-  image: string;
+  company_image: ICompanyImage | StaticImageData;
   lat: number;
   lng: number;
 }
@@ -106,20 +96,31 @@ const CommercialMap: React.FC<CommercialMapProps> = ({
     const processedData: CommerceMapData[] = [];
 
     companies.forEach((company) => {
-      const coordinates = extractCoordinatesFromMapsLink(
-        company.linkLocationMaps
-      );
+      // Verificar se temos coordenadas válidas (lat e long)
+      const hasValidCoordinates =
+        company.lat &&
+        company.long &&
+        !isNaN(company.lat) &&
+        !isNaN(company.long) &&
+        company.lat !== 0 &&
+        company.long !== 0;
 
-      if (coordinates) {
+      if (hasValidCoordinates) {
         processedData.push({
           id: company.id,
           name: company.name,
           address: company.address,
-          company_category: company.company_category || [], // Keep as array
-          image: company.company_image?.url || "/placeholder-business.jpg",
-          lat: coordinates.lat,
-          lng: coordinates.lng,
+          company_category: company.company_category || [],
+          company_image: company.company_image
+            ? company.company_image
+            : default_image,
+          lat: company.lat,
+          lng: company.long, // Converter 'long' para 'lng' para usar no Leaflet
         });
+      } else {
+        console.warn(
+          `Empresa "${company.name}" (ID: ${company.id}) não possui coordenadas válidas`
+        );
       }
     });
 
@@ -129,8 +130,13 @@ const CommercialMap: React.FC<CommercialMapProps> = ({
     if (singleCompany && processedData.length === 1) {
       setMapCenter([processedData[0].lat, processedData[0].lng]);
       setMapZoom(16); // Zoom mais próximo para empresa única
+    } else if (processedData.length > 0) {
+      // Para múltiplas empresas, calcular centro médio se necessário
+      // ou usar o centro padrão
+      setMapCenter(center);
+      setMapZoom(zoom);
     } else {
-      // Para múltiplas empresas ou mudança de página, resetar para posição inicial
+      // Se não há empresas com coordenadas válidas, usar centro padrão
       setMapCenter(center);
       setMapZoom(zoom);
     }
@@ -145,6 +151,9 @@ const CommercialMap: React.FC<CommercialMapProps> = ({
         <div className="text-center text-gray-500">
           <MapPin size={48} className="mx-auto mb-2 text-gray-400" />
           <p>Localização não disponível</p>
+          <p className="text-xs mt-2">
+            Nenhuma empresa com coordenadas válidas foi encontrada
+          </p>
         </div>
       </div>
     );
@@ -159,7 +168,7 @@ const CommercialMap: React.FC<CommercialMapProps> = ({
         zoom={mapZoom}
         style={{ height: "100%", width: "100%" }}
         scrollWheelZoom={true}
-        key={`${mapCenter[0]}-${mapCenter[1]}-${mapZoom}-${currentPage}`} // Force re-render when page changes
+        key={`${mapCenter[0]}-${mapCenter[1]}-${mapZoom}-${currentPage}`}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -180,7 +189,11 @@ const CommercialMap: React.FC<CommercialMapProps> = ({
                     name: commerce.name,
                     address: commerce.address,
                     company_category: commerce.company_category,
-                    image: commerce.image,
+                    company_image:
+                      typeof commerce.company_image === "object" &&
+                      "id" in commerce.company_image
+                        ? commerce.company_image
+                        : undefined,
                     id: commerce.id,
                   }}
                 />

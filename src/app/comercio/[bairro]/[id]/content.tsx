@@ -10,35 +10,8 @@ import Header from "@/components/header";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { usePublicCompany } from "@/provider/company";
-import { CompanyAnalyticsContext } from "@/provider/analytics/company";
 import DefaultImage from "../../../../assets/no-img.png";
-
-// Função para extrair coordenadas do link do Google Maps
-function extractCoordinatesFromMapsLink(
-  mapsLink: string
-): { lat: number; lng: number } | null {
-  if (!mapsLink) return null;
-
-  try {
-    // Padrão: https://www.google.com/maps?q=LAT,LNG
-    const url = new URL(mapsLink);
-    const qParam = url.searchParams.get("q");
-
-    if (qParam && qParam.includes(",")) {
-      const [lat, lng] = qParam.split(",");
-      const latitude = parseFloat(lat.trim());
-      const longitude = parseFloat(lng.trim());
-
-      if (!isNaN(latitude) && !isNaN(longitude)) {
-        return { lat: latitude, lng: longitude };
-      }
-    }
-  } catch (error) {
-    console.error("Erro ao extrair coordenadas do link:", error);
-  }
-
-  return null;
-}
+import { CompanyAnalyticsContext } from "@/provider/analytics/company";
 
 // Função para gerar URL do iframe do Google Maps com marcador
 function generateMapsEmbedUrl(
@@ -77,7 +50,6 @@ export default function ComercioDetails() {
 
   const [company, setCompany] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeImage, setActiveImage] = useState(0);
   const [hasTrackedInitialView, setHasTrackedInitialView] = useState(false);
 
   useEffect(() => {
@@ -92,10 +64,11 @@ export default function ComercioDetails() {
         try {
           const apiCompany = await getCompanyById(companyNameReplace);
 
-          // Extrair coordenadas do link do Google Maps
-          const coordinates = extractCoordinatesFromMapsLink(
-            apiCompany.linkLocationMaps
-          );
+          // Usar coordenadas diretamente do backend (lat e long)
+          const coordinates = {
+            lat: apiCompany.lat || -27.64662,
+            lng: apiCompany.long || -48.667361,
+          };
 
           // Adaptar dados da API para o formato esperado pelo componente
           const adaptedCompany = {
@@ -111,10 +84,7 @@ export default function ComercioDetails() {
             linkWhatsapp: apiCompany.linkWhatsapp,
             linkLocationMaps: apiCompany.linkLocationMaps,
             linkLocationWaze: apiCompany.linkLocationWaze,
-            location: coordinates || {
-              lat: -27.64662,
-              lng: -48.667361,
-            },
+            location: coordinates,
           };
 
           setCompany(adaptedCompany);
@@ -277,7 +247,7 @@ export default function ComercioDetails() {
   return (
     <DefaultPage>
       <Header />
-      <div className="min-w-72 max-w-[1272px] mx-auto py-5">
+      <div className="max-w-[1272px] mx-auto py-5">
         {/* Trilha de navegação */}
         <div className="hidden md:flex items-center gap-2 text-sm text-gray-500 mb-4">
           <Link href="/" className="hover:text-red-600 transition-colors">
@@ -288,7 +258,7 @@ export default function ComercioDetails() {
             href="/comercio"
             className="hover:text-red-600 transition-colors"
           >
-            Comércios de Biguaçu
+            Comércios de Palhoça
           </Link>
           <span className="text-gray-400">›</span>
           <Link
@@ -305,18 +275,16 @@ export default function ComercioDetails() {
         <div className="rounded-lg mb-8">
           <div className="flex flex-col lg:flex-row gap-6 items-start">
             {/* Coluna da esquerda com imagem e indicadores */}
-            <div className="relative w-full lg:w-5/12">
-              {/* Imagem principal */}
-              <div className="relative w-[408] h-[355px] rounded-lg overflow-hidden">
-                <Image
-                  src={company.image}
-                  alt={company.name}
-                  fill
-                  className="object-cover"
-                  priority
-                  unoptimized
-                />
-              </div>
+            {/* Imagem principal */}
+            <div className="relative w-[335px] lg:w-[480px] lg:min-w-[480px] h-[355px] rounded-lg overflow-hidden">
+              <Image
+                src={company.image}
+                alt={company.name}
+                fill
+                className="object-cover"
+                priority
+                unoptimized
+              />
             </div>
 
             {/* Detalhes do comércio */}

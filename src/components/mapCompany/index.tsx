@@ -30,11 +30,24 @@ interface ICompanyImage {
   company_id: string;
 }
 
+// Interface para imagens da empresa
+interface ICompanyImage {
+  id: string;
+  key: string;
+  url: string;
+  original_name?: string;
+  mime_type?: string;
+  size?: number;
+  uploaded_at?: Date;
+  company_id: string;
+}
+
 interface CommerceMapData {
   id: string;
   name: string;
   address: string;
   company_category: ICompanyCategory[];
+  company_image: ICompanyImage | StaticImageData;
   company_image: ICompanyImage | StaticImageData;
   lat: number;
   lng: number;
@@ -189,6 +202,11 @@ const CommercialMap: React.FC<CommercialMapProps> = ({
                     name: commerce.name,
                     address: commerce.address,
                     company_category: commerce.company_category,
+                    company_image:
+                      typeof commerce.company_image === "object" &&
+                      "id" in commerce.company_image
+                        ? commerce.company_image
+                        : undefined,
                     company_image:
                       typeof commerce.company_image === "object" &&
                       "id" in commerce.company_image

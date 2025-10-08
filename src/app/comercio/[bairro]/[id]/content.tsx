@@ -10,8 +10,8 @@ import Header from "@/components/header";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { usePublicCompany } from "@/provider/company";
-import DefaultImage from "../../../../assets/no-img.png";
 import { CompanyAnalyticsContext } from "@/provider/analytics/company";
+import DefaultImage from "../../../../assets/no-img.png";
 
 // Função para gerar URL do iframe do Google Maps com marcador
 function generateMapsEmbedUrl(
@@ -258,7 +258,7 @@ export default function ComercioDetails() {
             href="/comercio"
             className="hover:text-red-600 transition-colors"
           >
-            Comércios de Palhoça
+            Comércios de Biguaçu
           </Link>
           <span className="text-gray-400">›</span>
           <Link

@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { ChevronDown, X } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { districtsFlorianopolis } from "@/utils/mock-data";
+import { districtsBiguaçu } from "@/utils/mock-data";
 
 // Tipagem para o array de distritos
 type District = string;
@@ -35,7 +35,7 @@ const DistrictSelect: React.FC<DistrictSelectProps> = ({
 
   // Filtra os distritos baseado na busca
   const filteredDistricts: District[] =
-    districtsFlorianopolis?.filter((district: District) =>
+    districtsBiguaçu?.filter((district: District) =>
       district.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 

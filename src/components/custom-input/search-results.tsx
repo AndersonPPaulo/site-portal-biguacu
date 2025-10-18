@@ -142,7 +142,7 @@ export default function SearchResults({
                     alt={
                       article && article.title && article.title
                         ? article.title
-                        : "Imagem do portal Josefense"
+                        : "Imagem do portal Biguaçu"
                     }
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                     loading="lazy"

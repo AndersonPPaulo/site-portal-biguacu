@@ -156,7 +156,7 @@ export default function PostTopGridSection({
 
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-semibold text-primary">
-          Top Portal Josefense
+          Top Portal Biguaçu
         </h2>
       </div>
 
@@ -187,7 +187,7 @@ export default function PostTopGridSection({
                     alt={
                       post && post.title && post.title
                         ? post.title
-                        : "Imagem do portal Josefense"
+                        : "Imagem do portal Biguaçu"
                     }
                     fill
                     className="object-cover"

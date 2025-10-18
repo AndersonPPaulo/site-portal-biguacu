@@ -169,7 +169,7 @@ export default function PostGridSection() {
                   alt={
                     post && post.title && post.title
                       ? post.title
-                      : "Imagem do portal Josefense"
+                      : "Imagem do portal Biguaçu"
                   }
                   fill
                   unoptimized

@@ -214,7 +214,7 @@ export default function HeroSection() {
                 alt={
                   mainPost && mainPost.title && mainPost.title
                     ? mainPost.title
-                    : "Imagem do portal Josefense"
+                    : "Imagem do portal Biguaçu"
                 }
                 fill
                 unoptimized

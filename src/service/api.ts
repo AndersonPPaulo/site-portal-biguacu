@@ -4,6 +4,7 @@ export const api = axios.create({
   baseURL: "https://api.portalpalhoca.com.br/",
 });
 
+//link api em dev
 // export const api = axios.create({
 //   baseURL: "http://localhost:5555",
 // });

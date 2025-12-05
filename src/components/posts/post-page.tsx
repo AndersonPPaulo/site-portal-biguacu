@@ -168,7 +168,7 @@ export default function PostPage() {
               </div>
 
               {/* imagem */}
-              <div className="relative max-w-[340px] lg:max-w-[840px] h-[475px] rounded-md overflow-hidden">
+              <div className="relative max-w-[340px] lg:max-w-[840px]  h-[250px] md:h-[475px] rounded-md overflow-hidden">
                 {articleBySlug?.thumbnail?.url ? (
                   <Image
                     unoptimized
@@ -187,7 +187,7 @@ export default function PostPage() {
                         : "Imagem do portal Biguaçu"
                     }
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 ) : (
                   <Image

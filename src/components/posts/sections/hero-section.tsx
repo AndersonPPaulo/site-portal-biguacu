@@ -10,6 +10,7 @@ import { formatDate } from "@/utils/formatDate";
 import { useParams } from "next/navigation";
 import normalizeTextToslug from "@/utils/normalize-text-to-slug";
 import default_image from "@/assets/no-img.png";
+import { useArticleViewTracking } from "@/hooks/useIntersectionObserverArticle";
 
 export default function HeroSection() {
   const slug = useParams();
@@ -22,7 +23,9 @@ export default function HeroSection() {
     GetArticlesByPortalHighlightPositionTwo,
   } = useContext(ArticleContext);
 
-  const { TrackArticleClick } = useContext(ArticleAnalyticsContext);
+  const { TrackArticleClick, TrackArticleView } = useContext(
+    ArticleAnalyticsContext
+  );
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -44,6 +47,30 @@ export default function HeroSection() {
 
   const mainPost = articlesByPortalHighlightPositionOne?.data[0];
   const sidePosts = articlesByPortalHighlightPositionTwo?.data.slice(0, 3);
+
+  const mainPostTrackingData = mainPost
+    ? {
+        page: pathname,
+        section: "hero-section",
+        position: "main-article",
+        categoryName: mainPost.category.name,
+        articleTitle: mainPost.title,
+        highlightPosition: 1,
+      }
+    : {};
+
+  const { ref: mainPostRef, registerInitialView: registerMainPostView } =
+    useArticleViewTracking(
+      mainPost?.id || "",
+      mainPostTrackingData,
+      TrackArticleView
+    );
+
+  useEffect(() => {
+    if (mainPost) {
+      registerMainPostView();
+    }
+  }, [mainPost, registerMainPostView]);
 
   // Analytics: Função para registrar clique no artigo principal
   const handleMainPostClick = () => {
@@ -99,7 +126,10 @@ export default function HeroSection() {
           }`}
           onClick={handleMainPostClick}
         >
-          <div className="flex flex-col lg:flex-row gap-6 rounded-xl">
+          <div
+            ref={mainPostRef}
+            className="flex flex-col lg:flex-row gap-6 rounded-xl"
+          >
             <div className="relative md:min-w-[490px] max-w-[490px] min-h-[406px] max-h-[406px] rounded-xl overflow-hidden">
               <Image
                 src={mainPost?.thumbnail?.url ?? default_image}

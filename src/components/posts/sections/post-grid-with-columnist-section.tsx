@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Image from "next/image";
@@ -10,81 +11,7 @@ import { formatDate } from "@/utils/formatDate";
 import normalizeTextToslug from "@/utils/normalize-text-to-slug";
 import default_image from "@/assets/no-img.png";
 import { useArticleViewTracking } from "@/hooks/useIntersectionObserverArticle";
-
-export default function PostGridWwithColumnistSection() {
-  const slug = useParams();
-  const pathname = usePathname();
-  const slugName = slug.name?.toString();
-  const noSlug = !slugName;
-
-  const {
-    GetArticlesByPortalHighlightPositionFour,
-    articlesByPortalHighlightPositionFour,
-  } = useContext(ArticleContext);
-
-  const { TrackArticleClick, TrackArticleView } = useContext(
-    ArticleAnalyticsContext
-  );
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      await GetArticlesByPortalHighlightPositionFour({
-        category_name: slugName,
-        highlight: true,
-        highlightPosition: 4,
-      });
-    };
-
-    fetchArticles();
-  }, []);
-
-  const gridPosts =
-    articlesByPortalHighlightPositionFour?.data.slice(0, 4) || [];
-
-  // Analytics: Função para registrar clique no post do grid
-  const handleGridPostClick = (post: any, index: number) => {
-    TrackArticleClick(post.id, {
-      page: pathname,
-      section: "post-grid-columnist",
-      position: "grid-item",
-      categoryName: post.category.name,
-      articleTitle: post.title,
-      targetUrl: `/noticia/${normalizeTextToslug(post.category.name)}/${
-        post.slug
-      }`,
-      clickPosition: "grid-columnist-post",
-      gridIndex: index,
-      highlightPosition: 4,
-      gridSize: gridPosts.length,
-      hasSlug: !noSlug,
-      layoutType: noSlug ? "with-columnist" : "category-focused",
-      timestamp: new Date().toISOString(),
-    });
-  };
-
-  return (
-    <section className="w-full sm:px-6 lg:px-10 mx-auto max-w-7xl">
-      <div
-        className={`flex flex-col ${
-          noSlug ? "lg:flex-row" : "lg:flex-row"
-        } gap-10`}
-      >
-        {gridPosts.map((post, idx) => (
-          <ColumnistPostItem
-            key={post.id}
-            post={post}
-            index={idx}
-            pathname={pathname}
-            noSlug={noSlug}
-            handleGridPostClick={handleGridPostClick}
-            TrackArticleView={TrackArticleView}
-            gridSize={gridPosts.length}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
+import ColumnistCardWidget from "@/components/columnists/columnist-card-widget";
 
 function ColumnistPostItem({
   post,
@@ -171,5 +98,82 @@ function ColumnistPostItem({
         </div>
       </div>
     </Link>
+  );
+}
+
+export default function PostGridWwithColumnistSection() {
+  const slug = useParams();
+  const pathname = usePathname();
+  const slugName = slug.name?.toString();
+  const noSlug = !slugName;
+
+  const {
+    GetArticlesByPortalHighlightPositionFour,
+    articlesByPortalHighlightPositionFour,
+  } = useContext(ArticleContext);
+
+  const { TrackArticleClick, TrackArticleView } = useContext(
+    ArticleAnalyticsContext
+  );
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      await GetArticlesByPortalHighlightPositionFour({
+        category_name: slugName,
+        highlight: true,
+        highlightPosition: 4,
+      });
+    };
+
+    fetchArticles();
+  }, []);
+
+  const gridPosts =
+    articlesByPortalHighlightPositionFour?.data.slice(0, 3) || [];
+
+  // Analytics: Função para registrar clique no post do grid
+  const handleGridPostClick = (post: any, index: number) => {
+    TrackArticleClick(post.id, {
+      page: pathname,
+      section: "post-grid-columnist",
+      position: "grid-item",
+      categoryName: post.category.name,
+      articleTitle: post.title,
+      targetUrl: `/noticia/${normalizeTextToslug(post.category.name)}/${
+        post.slug
+      }`,
+      clickPosition: "grid-columnist-post",
+      gridIndex: index,
+      highlightPosition: 4,
+      gridSize: gridPosts.length,
+      hasSlug: !noSlug,
+      layoutType: noSlug ? "with-columnist" : "category-focused",
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  return (
+    <section className="w-full sm:px-6 lg:px-10 mx-auto max-w-7xl">
+      <div
+        className={`flex flex-col ${
+          noSlug ? "lg:flex-row" : "lg:flex-row"
+        } gap-10`}
+      >
+        {gridPosts.map((post, idx) => (
+          <ColumnistPostItem
+            key={post.id}
+            post={post}
+            index={idx}
+            pathname={pathname}
+            noSlug={noSlug}
+            handleGridPostClick={handleGridPostClick}
+            TrackArticleView={TrackArticleView}
+            gridSize={gridPosts.length}
+          />
+        ))}
+
+        <ColumnistCardWidget noSlug={noSlug} />
+      </div>
+    </section>
   );
 }

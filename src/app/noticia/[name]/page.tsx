@@ -1,10 +1,8 @@
+import ColumnistCardWidget from "@/components/columnists/columnist-card-widget";
 import DefaultPage from "@/components/default-page";
 import { Footer } from "@/components/footer";
 import Header from "@/components/header";
-import HeroSection from "@/components/posts/sections/hero-section";
 import ListArticlesByCategory from "@/components/posts/sections/list-news-by-category";
-import PostGridSection from "@/components/posts/sections/post-grid-section";
-import PostGridWwithColumnistSection from "@/components/posts/sections/post-grid-with-columnist-section";
 
 import type { Metadata } from "next";
 
@@ -57,10 +55,10 @@ export default function NewsPage() {
   return (
     <DefaultPage>
       <Header />
-      <main>
-        <HeroSection />
-        <PostGridSection />
-        <PostGridWwithColumnistSection />
+      <main className="relative min-h-75">
+        <div className="lg:absolute right-0 top-0">
+          <ColumnistCardWidget noSlug={true} />
+        </div>
 
         <ListArticlesByCategory />
       </main>

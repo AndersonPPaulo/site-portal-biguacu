@@ -19,9 +19,7 @@ export default function PostGridSection() {
     articlesByPortalHighlightPositionThree,
   } = useContext(ArticleContext);
 
-  const { TrackArticleClick } = useContext(
-    ArticleAnalyticsContext
-  );
+  const { TrackArticleClick } = useContext(ArticleAnalyticsContext);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -88,7 +86,6 @@ function GridPostItem({
   handleGridPostClick,
   gridSize,
 }: any) {
-
   return (
     <Link
       href={`/noticia/${normalizeTextToslug(post.category.name)}/${post.slug}`}

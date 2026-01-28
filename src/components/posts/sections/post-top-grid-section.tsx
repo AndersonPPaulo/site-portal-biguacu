@@ -19,9 +19,7 @@ export default function PostTopGridSection({
 
   const { GetPublishedArticles, publishedArticles } =
     useContext(ArticleContext);
-  const { TrackArticleClick } = useContext(
-    ArticleAnalyticsContext
-  );
+  const { TrackArticleClick } = useContext(ArticleAnalyticsContext);
 
   useEffect(() => {
     GetPublishedArticles({});
@@ -100,7 +98,6 @@ function TopPostItem({
   handleTopGridPostClick,
   topPostsLength,
 }: any) {
-
   return (
     <Link
       href={`/noticia/${normalizeTextToslug(post.category.name)}/${post.slug}`}

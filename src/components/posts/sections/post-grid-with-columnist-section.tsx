@@ -20,7 +20,6 @@ function ColumnistPostItem({
   handleGridPostClick,
   gridSize,
 }: any) {
-
   return (
     <Link
       href={`/noticia/${normalizeTextToslug(post.category.name)}/${post.slug}`}
@@ -87,9 +86,7 @@ export default function PostGridWwithColumnistSection() {
     articlesByPortalHighlightPositionFour,
   } = useContext(ArticleContext);
 
-  const { TrackArticleClick } = useContext(
-    ArticleAnalyticsContext
-  );
+  const { TrackArticleClick } = useContext(ArticleAnalyticsContext);
 
   useEffect(() => {
     const fetchArticles = async () => {

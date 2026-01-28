@@ -22,9 +22,7 @@ export default function HeroSection() {
     GetArticlesByPortalHighlightPositionTwo,
   } = useContext(ArticleContext);
 
-  const { TrackArticleClick } = useContext(
-    ArticleAnalyticsContext
-  );
+  const { TrackArticleClick } = useContext(ArticleAnalyticsContext);
 
   useEffect(() => {
     const fetchArticles = async () => {

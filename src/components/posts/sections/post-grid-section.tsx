@@ -9,7 +9,6 @@ import { ArticleAnalyticsContext } from "@/provider/analytics/article";
 import { formatDate } from "@/utils/formatDate";
 import normalizeTextToslug from "@/utils/normalize-text-to-slug";
 import default_image from "@/assets/no-img.png";
-import { useArticleViewTracking } from "@/hooks/useIntersectionObserverArticle";
 
 export default function PostGridSection() {
   const slug = useParams();
@@ -20,7 +19,7 @@ export default function PostGridSection() {
     articlesByPortalHighlightPositionThree,
   } = useContext(ArticleContext);
 
-  const { TrackArticleClick, TrackArticleView } = useContext(
+  const { TrackArticleClick } = useContext(
     ArticleAnalyticsContext
   );
 
@@ -74,7 +73,6 @@ export default function PostGridSection() {
             index={idx}
             pathname={pathname}
             handleGridPostClick={handleGridPostClick}
-            TrackArticleView={TrackArticleView}
             gridSize={gridPosts.length}
           />
         ))}
@@ -88,39 +86,15 @@ function GridPostItem({
   index,
   pathname,
   handleGridPostClick,
-  TrackArticleView,
   gridSize,
 }: any) {
-  const trackingData = {
-    page: pathname,
-    section: "post-grid",
-    position: "grid-item",
-    categoryName: post.category.name,
-    articleTitle: post.title,
-    gridIndex: index,
-    highlightPosition: 3,
-    gridSize: gridSize,
-  };
-
-  const { ref: gridPostRef, registerInitialView } = useArticleViewTracking(
-    post.id,
-    trackingData,
-    TrackArticleView
-  );
-
-  useEffect(() => {
-    registerInitialView();
-  }, [registerInitialView]);
 
   return (
     <Link
       href={`/noticia/${normalizeTextToslug(post.category.name)}/${post.slug}`}
       onClick={() => handleGridPostClick(post, index)}
     >
-      <div
-        ref={gridPostRef}
-        className="flex flex-col rounded-xl transition max-w-[405px] hover:transform hover:scale-105"
-      >
+      <div className="flex flex-col rounded-xl transition max-w-[405px] hover:transform hover:scale-105">
         <div className="relative min-w-[300px] md:w-[405px] h-[310px] rounded-md overflow-hidden">
           <Image
             src={

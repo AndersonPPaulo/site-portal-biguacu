@@ -96,7 +96,7 @@ export default function PostPage() {
     ) {
       console.log(
         "✅ [TRACK] Disparando view para artigo:",
-        articleBySlug.title
+        articleBySlug.title,
       );
 
       TrackArticleView(articleBySlug.id, {
@@ -117,7 +117,7 @@ export default function PostPage() {
       console.log(
         "⚠️ [TRACK] Ignorando artigo antigo:",
         articleBySlug?.title,
-        "(slug não corresponde)"
+        "(slug não corresponde)",
       );
     }
   }, [articleBySlug?.id, articleBySlug?.slug]);
@@ -138,7 +138,7 @@ export default function PostPage() {
 
     console.log(
       "👁️ [OBSERVER] Iniciando observer para artigo:",
-      articleBySlug.title
+      articleBySlug.title,
     );
 
     const observer = new IntersectionObserver(
@@ -168,7 +168,7 @@ export default function PostPage() {
           ) {
             console.log(
               "✅ [OBSERVER] Disparando view_end para:",
-              articleBySlug.title
+              articleBySlug.title,
             );
 
             TrackArticleViewEnd(currentArticleId, {
@@ -187,7 +187,7 @@ export default function PostPage() {
       {
         threshold: 0.5,
         rootMargin: "0px 0px -10% 0px",
-      }
+      },
     );
 
     observer.observe(currentRef);
@@ -300,8 +300,8 @@ export default function PostPage() {
                 {articleBySlug?.thumbnail?.description
                   ? articleBySlug?.thumbnail?.description
                   : !articleBySlug?.thumbnail?.url
-                  ? "Sem imagem cadastrada no momento"
-                  : "Imagem pertencente a noticia do Portal"}
+                    ? "Sem imagem cadastrada no momento"
+                    : "Imagem pertencente a noticia do Portal"}
               </span>
 
               {/* post banner */}
@@ -312,7 +312,7 @@ export default function PostPage() {
               {/* conteudo */}
               <div
                 className="
-    text-[16px] text-[#363636] max-w-[840px] mb-10
+    text-[16px] text-[#363636] max-w-[840px] mb-1
     [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mb-4
     [&_h2]:text-3xl [&_h2]:font-semibold [&_h2]:mb-3
     [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:mb-2
@@ -368,7 +368,7 @@ export default function PostPage() {
                                 >
                                   Foto {index + 1}: {image.description}
                                 </p>
-                              ) : null
+                              ) : null,
                             )}
                           </div>
                         )}
@@ -381,7 +381,7 @@ export default function PostPage() {
                 })()}
 
               {/* Botão CTA com observer para view_end */}
-              <div ref={whatsappButtonRef}>
+              <div ref={whatsappButtonRef} className="mb-5">
                 <ButtonCTAWhatsAppButton />
               </div>
             </div>
@@ -406,7 +406,7 @@ export default function PostPage() {
                       categoryName: post.category.name,
                       articleTitle: post.title,
                       targetUrl: `/noticia/${normalizeText(
-                        post.category.name
+                        post.category.name,
                       )}/${post.slug}`,
                       clickPosition: "side-post-item",
                       sidePostIndex: idx,

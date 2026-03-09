@@ -183,7 +183,7 @@ export function CompanyGridSection() {
 
       <div className="flex flex-col md:flex-row items-start gap-3 md:items-center justify-between">
         <h2 className="text-2xl font-semibold text-red-500 py-6">
-          Comércios que são destaques em Florianópolis!
+          Comércios que são destaques em Biguaçu!
         </h2>
 
         <Link
@@ -271,7 +271,7 @@ export function CompanyGridSectionWithSkeleton() {
 
       <div className="flex flex-col md:flex-row items-start gap-3 md:items-center justify-between">
         <h2 className="text-2xl font-semibold text-red-500 py-6">
-          Comércios que são destaques em Florianópolis!
+          Comércios que são destaques em Biguaçu!
         </h2>
 
         <Link

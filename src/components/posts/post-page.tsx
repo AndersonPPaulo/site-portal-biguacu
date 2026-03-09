@@ -73,19 +73,19 @@ export default function PostPage() {
 
   // Tracking de view inicial quando o artigo é carregado
   useEffect(() => {
-    console.log("🔍 [TRACK DEBUG] Verificando condições:", {
-      articleId: articleBySlug?.id,
-      articleSlug: articleBySlug?.slug,
-      currentSlug: currentSlugRef.current,
-      slugsMatch: articleBySlug?.slug === currentSlugRef.current,
-      hasTrackedInitialView,
-      lastTrackedArticleId: lastTrackedArticleId.current,
-      shouldTrack:
-        articleBySlug?.id &&
-        articleBySlug?.slug === currentSlugRef.current &&
-        !hasTrackedInitialView &&
-        lastTrackedArticleId.current !== articleBySlug.id,
-    });
+    // console.log("🔍 [TRACK DEBUG] Verificando condições:", {
+    //   articleId: articleBySlug?.id,
+    //   articleSlug: articleBySlug?.slug,
+    //   currentSlug: currentSlugRef.current,
+    //   slugsMatch: articleBySlug?.slug === currentSlugRef.current,
+    //   hasTrackedInitialView,
+    //   lastTrackedArticleId: lastTrackedArticleId.current,
+    //   shouldTrack:
+    //     articleBySlug?.id &&
+    //     articleBySlug?.slug === currentSlugRef.current &&
+    //     !hasTrackedInitialView &&
+    //     lastTrackedArticleId.current !== articleBySlug.id,
+    // });
 
     // CRÍTICO: Só rastreia se o artigo carregado corresponde ao slug atual
     if (
@@ -94,10 +94,10 @@ export default function PostPage() {
       !hasTrackedInitialView &&
       lastTrackedArticleId.current !== articleBySlug.id
     ) {
-      console.log(
-        "✅ [TRACK] Disparando view para artigo:",
-        articleBySlug.title,
-      );
+      // console.log(
+      //   "✅ [TRACK] Disparando view para artigo:",
+      //   articleBySlug.title,
+      // );
 
       TrackArticleView(articleBySlug.id, {
         page: window.location.pathname,
@@ -136,27 +136,27 @@ export default function PostPage() {
     const currentArticleId = articleBySlug.id;
     const currentArticleSlug = articleBySlug.slug;
 
-    console.log(
-      "👁️ [OBSERVER] Iniciando observer para artigo:",
-      articleBySlug.title,
-    );
+    // console.log(
+    //   "👁️ [OBSERVER] Iniciando observer para artigo:",
+    //   articleBySlug.title,
+    // );
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log("👁️ [OBSERVER] Entry:", {
-            isIntersecting: entry.isIntersecting,
-            currentArticleId,
-            currentArticleSlug,
-            articleBySlugId: articleBySlug?.id,
-            articleBySlugSlug: articleBySlug?.slug,
-            currentSlug: currentSlugRef.current,
-            viewEndTracked: viewEndTrackedRef.current,
-            isSameArticle:
-              articleBySlug?.id === currentArticleId &&
-              articleBySlug?.slug === currentArticleSlug,
-            slugMatches: currentArticleSlug === currentSlugRef.current,
-          });
+          // console.log("👁️ [OBSERVER] Entry:", {
+          //   isIntersecting: entry.isIntersecting,
+          //   currentArticleId,
+          //   currentArticleSlug,
+          //   articleBySlugId: articleBySlug?.id,
+          //   articleBySlugSlug: articleBySlug?.slug,
+          //   currentSlug: currentSlugRef.current,
+          //   viewEndTracked: viewEndTrackedRef.current,
+          //   isSameArticle:
+          //     articleBySlug?.id === currentArticleId &&
+          //     articleBySlug?.slug === currentArticleSlug,
+          //   slugMatches: currentArticleSlug === currentSlugRef.current,
+          // });
 
           // CRÍTICO: Verifica se ainda é o mesmo artigo E se o slug corresponde
           if (
@@ -166,11 +166,6 @@ export default function PostPage() {
             articleBySlug?.slug === currentArticleSlug &&
             currentArticleSlug === currentSlugRef.current
           ) {
-            console.log(
-              "✅ [OBSERVER] Disparando view_end para:",
-              articleBySlug.title,
-            );
-
             TrackArticleViewEnd(currentArticleId, {
               article_title: articleBySlug.title,
               trigger: "scroll_to_whatsapp_button",
@@ -194,7 +189,7 @@ export default function PostPage() {
 
     // Cleanup: desconectar observer ao desmontar ou trocar de artigo
     return () => {
-      console.log("🧹 [OBSERVER] Desconectando observer");
+      // console.log("🧹 [OBSERVER] Desconectando observer");
       observer.disconnect();
     };
   }, [articleBySlug?.id, articleBySlug?.slug, articleBySlug?.title]);
@@ -263,7 +258,7 @@ export default function PostPage() {
               </div>
 
               {/* imagem */}
-              <div className="relative max-w-[340px] lg:max-w-[840px]  h-[250px] md:h-[475px] rounded-md overflow-hidden">
+              <div className="relative max-w-[340px] lg:max-w-[840px] h-[250px] md:h-[475px] rounded-md overflow-hidden">
                 {articleBySlug?.thumbnail?.url ? (
                   <Image
                     unoptimized
@@ -279,7 +274,7 @@ export default function PostPage() {
                       articleBySlug.title &&
                       articleBySlug.title
                         ? articleBySlug.title
-                        : "Imagem do portal Biguaçu"
+                        : "Imagem do portal florianiopolis"
                     }
                     fill
                     className="object-contain"
@@ -389,7 +384,7 @@ export default function PostPage() {
         </div>
 
         {/* Side Posts */}
-        <div className="flex flex-col max-w-[356px]">
+        <div className="hidden lg:flex flex-col max-w-[356px]">
           <div className="shadow-md">
             {sidePosts &&
               sidePosts.map((post, idx) => (

@@ -86,7 +86,7 @@ const PostBanner = () => {
   return (
     <div
       ref={bannerRef} // Ref do hook personalizado
-      className={`flex flex-col md:flex-row mx-auto px-0 md:px-8 py-3 items-center relative ${highlightedCompanies?.data.length === 0 ? "mt-40" : "mt-0"}`}
+      className={`flex flex-col md:flex-row mx-auto px-0 md:px-8 py-3 items-center relative ${highlightedCompanies?.data.length === 0 ? "mt-10" : "mt-0"}`}
     >
       <span className="block w-full min-w-[360px] md:w-18 md:min-w-0 text-[12px] text-gray-400 md:absolute md:left-[-30px] md:top-1/2 md:-translate-y-1/2 mb-1 md:mb-0 md:transform md:-rotate-90">
         PUBLICIDADE

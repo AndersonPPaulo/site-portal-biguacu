@@ -1,5 +1,3 @@
-import { usePublicCompany } from "@/provider/company";
-"use client";
 
 import { api } from "@/service/api";
 import {

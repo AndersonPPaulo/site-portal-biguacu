@@ -8,43 +8,55 @@ import { useContext, useEffect, useState } from "react";
 import { BannerContext, BannerItem } from "@/provider/banner";
 import { BannerAnalyticsContext } from "@/provider/analytics/banner";
 import { useBannerViewTracking } from "@/hooks/useIntersectionObserverBanner";
+import { PortalContext } from "@/provider/portal";
 
 const SideBanner = () => {
   const { ListBannersSidebar, bannersSidebar } = useContext(BannerContext);
-  const { TrackBannerView, TrackBannerClick } = useContext(BannerAnalyticsContext);
-  
+  const { TrackBannerView, TrackBannerClick } = useContext(
+    BannerAnalyticsContext
+  );
+  const { SelfPortalByReferer, portal } = useContext(PortalContext);
+
   const [isVisible, setIsVisible] = useState(false);
   const [randomBanner, setRandomBanner] = useState<BannerItem | null>(null);
   const pathname = usePathname();
   const shouldDisplayBanner = !pathname?.startsWith("/comercio");
 
   // Dados para tracking
-  const trackingData = randomBanner ? {
-    page: pathname,
-    section: 'side-banner',
-    bannerStyle: randomBanner.banner_style,
-    bannerName: randomBanner.name,
-    company: randomBanner.company?.name,
-    selectedFrom: bannersSidebar?.data?.length || 0,
-  } : {};
+  const trackingData = randomBanner
+    ? {
+        page: pathname,
+        section: "side-banner",
+        bannerStyle: randomBanner.banner_style,
+        bannerName: randomBanner.name,
+        company: randomBanner.company?.name,
+        selectedFrom: bannersSidebar?.data?.length || 0,
+      }
+    : {};
 
-  // Hook personalizado para intersection tracking 
-  const { 
-    ref: bannerRef, 
-    registerInitialView, 
-    hasInitialView
+  // Hook personalizado para intersection tracking
+  const {
+    ref: bannerRef,
+    registerInitialView,
+    hasInitialView,
   } = useBannerViewTracking(
-    randomBanner?.id || '',
+    randomBanner?.id || "",
     trackingData,
     TrackBannerView
   );
 
   // Requisição dos banners quando o componente carrega
   useEffect(() => {
-    if (shouldDisplayBanner) {
-      ListBannersSidebar({});
+    const host = window.location.host;
+    const referer = host.replace(":3000", "");
+    SelfPortalByReferer(referer);
+  }, []);
+
+  useEffect(() => {
+    if (shouldDisplayBanner && portal?.link_referer) {
+      ListBannersSidebar({ linkReferer: portal.link_referer });
     }
-  }, [shouldDisplayBanner, pathname]);
+  }, [shouldDisplayBanner, pathname, portal]);
 
   // Escolher o banner aleatório assim que os banners forem carregados
   useEffect(() => {
@@ -70,8 +82,8 @@ const SideBanner = () => {
       TrackBannerClick(randomBanner.id, {
         ...trackingData,
         targetUrl: randomBanner.link_direction,
-        clickPosition: 'side-banner-image',
-        timestamp: new Date().toISOString()
+        clickPosition: "side-banner-image",
+        timestamp: new Date().toISOString(),
       });
     }
   };
@@ -85,8 +97,8 @@ const SideBanner = () => {
   if (!isVisible || !randomBanner) return null;
 
   return (
-    <div 
-      ref={bannerRef} 
+    <div
+      ref={bannerRef}
       className="flex flex-col mx-auto px-0 py-3 max-w-[315px] lg:ms-10 items-end"
     >
       <span className="w-full text-[12px] text-gray-400">PUBLICIDADE</span>
@@ -95,13 +107,13 @@ const SideBanner = () => {
         target="_blank"
         rel="noopener noreferrer"
         className="rounded-xl shadow-lg"
-        onClick={handleBannerClick} 
+        onClick={handleBannerClick}
       >
         <Image
           src={randomBanner.url}
           width={330}
           height={500}
-          alt={randomBanner.name} 
+          alt={randomBanner.name}
           priority
           unoptimized
           className="bg-cover rounded-lg"

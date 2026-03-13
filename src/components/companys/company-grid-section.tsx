@@ -174,14 +174,14 @@ export function CompanyGridSection() {
   return (
     <section
       className={`w-full max-w-[1272px] mx-auto px-4 ${
-        !isArticlePage ? "mt-8 md:mt-16 py-2" : "mt-12 md:mt-20"
+        !isArticlePage ? "mt-8 md:mt-20 py-2" : ""
       }`}
     >
-      <div className="w-[106px] h-2 bg-red-500 rounded-full" />
+      <div className="w-[106px]  h-2 bg-red-500 rounded-full" />
 
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
         <h2 className="text-2xl font-semibold text-red-500 py-6">
-          Comércios que são destaques em Florianópolis!
+          Comércios que são destaques em Biguaçu!
         </h2>
 
         <Link
@@ -269,7 +269,7 @@ export function CompanyGridSectionWithSkeleton() {
 
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
         <h2 className="text-2xl font-semibold text-red-500 py-6">
-          Comércios que são destaques em Florianópolis!
+          Comércios que são destaques em Biguaçu!
         </h2>
 
         <Link

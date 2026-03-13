@@ -101,7 +101,8 @@ export default function ClientListArticlesByCategory() {
       );
       setSelectedDistrict("");
     }
-  }, [categoryQuery, pathname, listAllCompanies, clearSelectedCompany]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryQuery, pathname]);
 
   // Disparar evento de categoria
   useEffect(() => {

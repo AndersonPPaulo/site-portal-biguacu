@@ -22,12 +22,16 @@ export default function PostTopGridSection({
   const { TrackArticleClick } = useContext(ArticleAnalyticsContext);
 
   useEffect(() => {
-    GetPublishedArticles({});
+    GetPublishedArticles({ limit: 20 });
   }, []);
 
-  // Filtra para remover o post atual antes de ordenar
+  // Filtra para remover o post atual e notícias de colunistas (por role do creator)
   const filteredPosts =
-    publishedArticles?.data.filter((post) => post.id !== currentPostId) || [];
+    publishedArticles?.data.filter(
+      (post) =>
+        post.id !== currentPostId &&
+        post.creator?.role?.name?.toLowerCase() !== "colunista",
+    ) || [];
 
   const sortedPosts = filteredPosts
     .sort((a, b) => {
@@ -39,7 +43,7 @@ export default function PostTopGridSection({
 
       return dateB.getTime() - dateA.getTime(); // Mais recentes primeiro
     })
-    .slice(0, 9);
+    .slice(0, 6);
 
   const topPosts = sortedPosts || [];
 
@@ -81,9 +85,7 @@ export default function PostTopGridSection({
             key={post.id}
             post={post}
             index={idx}
-            pathname={pathname}
             handleTopGridPostClick={handleTopGridPostClick}
-            topPostsLength={topPosts.length}
           />
         ))}
       </div>
@@ -94,10 +96,33 @@ export default function PostTopGridSection({
 function TopPostItem({
   post,
   index,
-  pathname,
   handleTopGridPostClick,
-  topPostsLength,
 }: any) {
+  // Analytics desativado: top post tracking
+  // const trackingData = {
+  //   page: pathname,
+  //   section: "top-portal-grid",
+  //   position: "grid-item",
+  //   categoryName: post.category.name,
+  //   articleTitle: post.title,
+  //   gridIndex: index,
+  //   gridPosition: `${Math.floor(index / 3) + 1}-${(index % 3) + 1}`,
+  //   gridSize: topPostsLength,
+  //   gridRows: Math.ceil(topPostsLength / 3),
+  //   gridCols: 3,
+  //   sortOrder: "newest_first",
+  // };
+
+  // const { ref: topPostRef, registerInitialView } = useArticleViewTracking(
+  //   post.id,
+  //   trackingData,
+  //   TrackArticleView
+  // );
+
+  // useEffect(() => {
+  //   registerInitialView();
+  // }, [registerInitialView]);
+
   return (
     <Link
       href={`/noticia/${normalizeTextToslug(post.category.name)}/${post.slug}`}
